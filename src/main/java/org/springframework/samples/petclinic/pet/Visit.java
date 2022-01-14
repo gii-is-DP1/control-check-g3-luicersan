@@ -25,9 +25,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.recoveryroom.RecoveryRoom;
+import org.springframework.samples.petclinic.recoveryroom.RecoveryRoomRepository;
 
 /**
  * Simple JavaBean domain object representing a visit.
@@ -37,7 +39,7 @@ import org.springframework.samples.petclinic.recoveryroom.RecoveryRoom;
 @Entity
 @Table(name = "visits")
 public class Visit extends BaseEntity {
-
+	
 	/**
 	 * Holds value of property date.
 	 */
@@ -59,6 +61,10 @@ public class Visit extends BaseEntity {
 	@JoinColumn(name = "pet_id")
 	private Pet pet;
 
+	@ManyToOne
+	@JoinColumn(name = "recovery_room_id")
+	private RecoveryRoom recoveryRoom;
+	
 	/**
 	 * Creates a new instance of Visit for the current date
 	 */
@@ -113,14 +119,18 @@ public class Visit extends BaseEntity {
 	public void setPet(Pet pet) {
 		this.pet = pet;
 	}
+	
+	
+	
+	
 
 	public RecoveryRoom getRecoveryRoom() {
 		// To be implemented
-		return null;
+		return this.recoveryRoom;
 	}
 
 	public void setRecoveryRoom(RecoveryRoom room) {
-		// To be implemented
+		this.recoveryRoom = room;
 	}
 
 }
