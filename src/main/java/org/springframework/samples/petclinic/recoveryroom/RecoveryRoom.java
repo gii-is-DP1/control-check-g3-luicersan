@@ -1,6 +1,9 @@
 package org.springframework.samples.petclinic.recoveryroom;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -9,7 +12,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.samples.petclinic.model.BaseEntity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +20,12 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="recovery_room")
-public class RecoveryRoom extends BaseEntity{
+public class RecoveryRoom{
     
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Integer id;
+	
     @NotNull
 	@Size(min = 3, max = 50)
     String name;
@@ -31,9 +37,8 @@ public class RecoveryRoom extends BaseEntity{
     @NotNull
     boolean secure;
     
-    @ManyToOne
-    @JoinColumn(name="room_type_id")
-    @Transient
-    RecoveryRoomType recoveryRoomType;
-	
+    @ManyToOne(optional=false)
+    @JoinColumn(name="recovery_room_type_id")
+//    @Transient
+    RecoveryRoomType roomType;
 }

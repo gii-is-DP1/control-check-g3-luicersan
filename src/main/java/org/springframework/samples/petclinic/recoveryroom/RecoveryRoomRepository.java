@@ -8,19 +8,36 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface RecoveryRoomRepository extends CrudRepository<RecoveryRoom, Integer>{
     
-	@Query("SELECT r FROM recovery_room r")
+	@Query("SELECT r FROM RecoveryRoom r")
 	List<RecoveryRoom> findAll();
     
-    @Query("SELECT r FROM recovery_room_type r")
-    List<RecoveryRoomType> findAllRecoveryRoomTypes();
+	@Query("SELECT r FROM RecoveryRoomType r")
+	List<RecoveryRoomType> findAllRecoveryRoomTypes();
     
+	Optional<RecoveryRoom> findById(int id);
     
-    Optional<RecoveryRoom> findById(int id);
-    //RecoveryRoom save(RecoveryRoom p);
+	//RecoveryRoom save(RecoveryRoom p);
     
-    @Query("SELECT r FROM recovery_room_type r WHERE r.name=?1")
+    @Query("SELECT r FROM RecoveryRoomType r WHERE r.name =?1")
     RecoveryRoomType getRecoveryRoomType(String name);
     
-    @Query("SELECT r FROM recovery_room r WHERE r.size>?1")
+    @Query("SELECT r FROM RecoveryRoom r WHERE r.size>?1")
     List<RecoveryRoom> findBySizeMoreThan(double size);
+	
+	/*
+	@Query("SELECT r FROM RecoveryRoomType r")
+    List<RecoveryRoomType> findAllRecoveryRoomTypes();
+    
+	//@Query("SELECT r FROM recovery_room r")
+	List<RecoveryRoom> findAll();
+    
+    Optional<RecoveryRoom> findById(int id);
+    RecoveryRoom save(RecoveryRoom p);
+    
+    //@Query("SELECT r FROM recovery_room_type r WHERE r.name=?1")
+    RecoveryRoomType getRecoveryRoomType(String name);
+    
+    //@Query("SELECT r FROM recovery_room r WHERE r.size>?1")
+    List<RecoveryRoom> findBySizeMoreThan(double size);
+	*/
 }

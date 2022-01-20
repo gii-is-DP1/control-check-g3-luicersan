@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RecoveryRoomTypeFormatter implements Formatter<RecoveryRoomType>{
-
+	
+	/*
 	@Autowired
 	private RecoveryRoomService recoveryRoomService;
 	
@@ -18,6 +19,28 @@ public class RecoveryRoomTypeFormatter implements Formatter<RecoveryRoomType>{
     	String nombre = object.getName();
         return nombre;
     }
+    */
+	
+	@Autowired
+	private RecoveryRoomService recoveryRoomService;
+	
+	@Override
+    public String print(RecoveryRoomType object, Locale locale) {
+        String nombre = object.getName();
+		return nombre;
+    }
+	
+	@Override
+    public RecoveryRoomType parse(String text, Locale locale) throws ParseException {
+		RecoveryRoomType rrt = this.recoveryRoomService.getRecoveryRoomType(text);
+		if(rrt == null) {
+			throw new ParseException("Recovery room type not found: " + text, 0);
+		}else {
+			return rrt;
+		}
+	}
+	
+	/*
 
     @Override
     public RecoveryRoomType parse(String text, Locale locale) throws ParseException {
@@ -29,5 +52,5 @@ public class RecoveryRoomTypeFormatter implements Formatter<RecoveryRoomType>{
     	}
     }
     
-    
+    */
 }
