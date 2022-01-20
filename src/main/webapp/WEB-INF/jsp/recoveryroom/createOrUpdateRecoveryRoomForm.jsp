@@ -1,10 +1,12 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<petclinic:layout pageName="owners">
+<petclinic:layout pageName="recoveryroom">
     <jsp:attribute name="customScript">
         <script>
             $(function () {
@@ -14,22 +16,22 @@
     </jsp:attribute>
     <jsp:body>
         <h2>
-            Recovery Room
+            New recovery room
         </h2>
-        <form:form modelAttribute="recoveryRoom"
-                   class="form-horizontal">
-            <input type="hidden" name="id" value="${recoveryRoom.id}"/>
+        <form:form modelAttribute="recoveryRoom" class="form-horizontal">
+        	<input type="hidden" name="id" value="${recoveryRoom.id}"/>
             <div class="form-group has-feedback">
                 <petclinic:inputField label="Room name" name="name"/>
                 <petclinic:inputField label="Room size in m2" name="size"/>
                 <petclinic:checkboxField label="Secure room?" name="secure"/>
                 <div class="control-group">
-                    <petclinic:selectField name="type" label="Room type " names="${types}" size="5"/>
+                    <petclinic:selectField name="roomType" label="Room type "
+                    names="${recoveryRoomType}" size="5"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button class="btn btn-default" type="submit">Update Room</button>
+                    <button class="btn btn-default" type="submit">Create Room</button>
                 </div>
             </div>
         </form:form>

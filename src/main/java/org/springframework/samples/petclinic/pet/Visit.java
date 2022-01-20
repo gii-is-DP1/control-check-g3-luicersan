@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.pet;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -113,14 +114,19 @@ public class Visit extends BaseEntity {
 	public void setPet(Pet pet) {
 		this.pet = pet;
 	}
+	
+	@ManyToOne(optional=true)
+	@JoinColumn(name = "recovery_room_id")
+	private RecoveryRoom recoveryRoom;
 
 	public RecoveryRoom getRecoveryRoom() {
 		// To be implemented
-		return null;
+		return this.recoveryRoom;
 	}
 
 	public void setRecoveryRoom(RecoveryRoom room) {
 		// To be implemented
+		this.recoveryRoom = room;
 	}
 
 }
